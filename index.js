@@ -53,7 +53,7 @@ CAS.prototype.key = function (buf, ext) {
       })
 
       reject(new Error('DNE'))
-    }).end()
+    }).on('error', reject).end()
   }).catch(function (err) {
     if (err.message !== 'DNE') throw err
     return Promise.resolve(compressible(type) ? zlib.gzip(buf) : null)
