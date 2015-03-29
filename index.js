@@ -77,7 +77,15 @@ CAS.prototype.key = function (buf, ext) {
         client.putBuffer(buf, key, headers, function (err, res) {
           if (err) return reject(err)
           res.resume()
-          resolve(key)
+          if (res.statusCode === 200) return resolve(key)
+
+          reject(new Error('Could not upload file.'))
+
+          // TODO: handle this
+          res.setEncoding('utf8')
+          res.on('data', function (str) {
+            debug(str)
+          })
         })
       })
     })

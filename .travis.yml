@@ -1,6 +1,11 @@
 node_js:
-- "iojs"
+- iojs
 sudo: false
 language: node_js
-script: "npm run-script test-travis"
-after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
+script: npm run-script test-travis
+after_script: npm install coveralls@2 && cat ./coverage/lcov.info | coveralls
+env:
+  global:
+  - secure: a9OUCKvPN4DE24231beEx2KnwyhrTGgZDJgJ1UBI8b1x2ESrGr07To3/DM0osYtDRpAuQ8ieJk7jeGHDScOThY74qTitceBB5SzwIBXiI6ep2DFlZZSmDxDeaA+4wYhuLB48cGSc1ASCdGK/vwiIgB8EJi+ft/kAHaa9e7M20Ro=
+  - secure: So7+fHhu/hHlg62ucry4TyyL1Q9+AvGtBZuewE46H1woZ6oys2DNQhMgilYWMXtzLBFWuqi7qhhq+peB+9VteJLMgNINjo83wvD/yUyuZOESrUb1fNmeDvuu+GQ2XGl8IIEkWKB7EHOYxBmzwFzMst1WbbgZkL4WTNpt1BKphm8=
+  - secure: MwLQUJLmHgWViUfE7bPazBWVcEIHtThbxwLmWyaIoR3e5CHX2rJY05/fAAxDmH2aCe9nXNMcxok5nczO1QLBEvCma4667/P9zehWVS7MYKXzUpJMiIxyXXPFnqiYWP5KjonVw1RxFiO5RNiokVAr1sEFj1Pwd2qNErXStM6UoO0=
