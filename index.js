@@ -1,11 +1,12 @@
+'use strict'
 
-var compressible = require('compressible')
-var debug = require('debug')('cas')
-var mime = require('mime-types')
-var assert = require('assert')
-var crypto = require('crypto')
-var zlib = require('mz/zlib')
-var knox = require('knox')
+const compressible = require('compressible')
+const debug = require('debug')('cas')
+const mime = require('mime-types')
+const assert = require('assert')
+const crypto = require('crypto')
+const zlib = require('mz/zlib')
+const knox = require('knox')
 
 module.exports = CAS
 
@@ -27,15 +28,15 @@ CAS.prototype.url = function (key, cdn) {
 }
 
 CAS.prototype.key = function (buf, ext) {
-  var type = mime.lookup(ext)
+  let type = mime.lookup(ext)
   if (!type) return Promise.reject(new Error('Unknown extension: ' + ext))
 
-  var hash = crypto.createHash('sha256')
+  let hash = crypto.createHash('sha256')
     .update(buf)
     .digest('hex')
 
-  var key = hash + '.' + ext
-  var client = this.client
+  let key = hash + '.' + ext
+  let client = this.client
 
   // check if it exists
   return new Promise(function (resolve, reject) {
@@ -58,13 +59,13 @@ CAS.prototype.key = function (buf, ext) {
     if (err.message !== 'DNE') throw err
     return Promise.resolve(compressible(type) ? zlib.gzip(buf) : null)
     .then(function (buf2) {
-      var headers = {
+      let headers = {
         'Cache-Control': 'public, max-age=31536000',
         'Content-Type': mime.contentType(type),
         'x-amz-acl': 'public-read',
       }
 
-      var compress = Buffer.isBuffer(buf2) && buf2.length < buf.length
+      let compress = Buffer.isBuffer(buf2) && buf2.length < buf.length
       if (compress) {
         buf = buf2
         headers['Content-Encoding'] = 'gzip'
