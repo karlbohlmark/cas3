@@ -26,6 +26,7 @@ Options are:
 - `key` - s3 key
 - `secret` - s3 secret key
 - `cdn` - optional CDN host, defaulting to the s3 bucket, such as `https://lakjsflkajfd.cloudfront.net`
+- `region` - optional bucket AWS region, such as `eu-west-1`, defaulting to the US Standard region
 
 ### cas.key(buffer | string, extension).then( key => )
 
